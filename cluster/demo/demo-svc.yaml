@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo
+  labels:
+    k8s-app: demo
+spec:
+  type: NodePort 
+  selector:
+    k8s-app: demo
+  ports:
+  - port: 8081
+    nodePort: 32081

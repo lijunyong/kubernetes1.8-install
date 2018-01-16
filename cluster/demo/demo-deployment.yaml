@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: demo
+  labels:
+    k8s-app: demo
+spec:
+  selector:
+    matchLabels:
+      k8s-app: demo
+  template:
+    metadata:
+      labels:
+        k8s-app: demo
+    spec:
+      imagePullSecrets:
+      - name: registry-secret
+      containers:
+      - name: demo
+        image: 120.55.49.222/test/demo:latest
+        ports:
+        - containerPort: 8081
+        volumeMounts:
+          - name: nfs
+            mountPath: "/home"
+      volumes:
+      - name: nfs
+        nfs:
+           server: 172.16.56.224
+           path: "/nfs_shared/shared/"  
