@@ -92,7 +92,7 @@ EOF
 ```
 [root@localhost ~]# cat /etc/docker/daemon.json 
 {
-  "registry-mirrors": ["https://so4p5nnk.mirror.aliyuncs.com"],
+  "registry-mirrors": ["https://0b33z6az.mirror.aliyuncs.com"],
   "hosts": ["tcp://0.0.0.0:2375", "unix:///var/run/docker.sock"],
   "insecure-registries": ["172.20.0.119"]
 }
