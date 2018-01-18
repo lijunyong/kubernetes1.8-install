@@ -26,12 +26,6 @@ setenforce 0
 
 ## 创建TLS证书和秘钥
 
-执行下列步骤前建议你先阅读以下内容：
-
-**注意**：这一步是在安装配置kubernetes的所有步骤中最容易出错也最难于排查问题的一步，而这却刚好是第一步，万事开头难，不要因为这点困难就望而却步。
-
-**如果您足够有信心在完全不了解自己在做什么的情况下能够成功地完成了这一步的配置，那么您可以尽管跳过上面的几篇文章直接进行下面的操作。**
-
 `kubernetes` 系统的各组件需要使用 `TLS` 证书对通信进行加密，本文档使用 `CloudFlare` 的 PKI 工具集 [cfssl](https://github.com/cloudflare/cfssl) 来生成 Certificate Authority (CA) 和其它证书；
 
 **生成的 CA 证书和秘钥文件如下：**
@@ -75,22 +69,6 @@ mv cfssl-certinfo_linux-amd64 /usr/local/bin/cfssl-certinfo
 
 export PATH=/usr/local/bin:$PATH
 ```
-
-**方式二：使用go命令安装**
-
-我们的系统中安装了Go1.7.5，使用以下命令安装更快捷：
-
-```bash
-$ go get -u github.com/cloudflare/cfssl/cmd/...
-$ echo $GOPATH
-/usr/local
-$ls /usr/local/bin/cfssl*
-cfssl cfssl-bundle cfssl-certinfo cfssljson cfssl-newkey cfssl-scan
-```
-
-在`$GOPATH/bin`目录下得到以cfssl开头的几个命令。
-
-注意：以下文章中出现的cat的文件名如果不存在需要手工创建。
 
 ## 创建 CA (Certificate Authority)
 
@@ -210,12 +188,6 @@ ca-config.json  ca.csr  ca-csr.json  ca-key.pem  ca.pem
 $ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes kubernetes-csr.json | cfssljson -bare kubernetes
 $ ls kubernetes*
 kubernetes.csr  kubernetes-csr.json  kubernetes-key.pem  kubernetes.pem
-```
-
-或者直接在命令行上指定相关参数：
-
-``` bash
-echo '{"CN":"kubernetes","hosts":[""],"key":{"algo":"rsa","size":2048}}' | cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes -hostname="127.0.0.1,172.20.0.112,172.20.0.113,172.20.0.114,172.20.0.115,kubernetes,kubernetes.default" - | cfssljson -bare kubernetes
 ```
 
 ## 创建 admin 证书
