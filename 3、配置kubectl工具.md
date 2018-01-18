@@ -40,7 +40,3 @@ kubectl config use-context kubernetes
 
 **注意：**`~/.kube/config`文件拥有对该集群的最高权限，请妥善保管。
 
-## 更多资料
-
-- [kubectl命令概览](../guide/using-kubectl.md)
-- [kubectl命令技巧大全](../guide/kubectl-cheatsheet.md)
