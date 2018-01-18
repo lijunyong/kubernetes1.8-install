@@ -91,7 +91,7 @@ WantedBy=multi-user.target
 systemctl daemon-reload
 systemctl restart docker
 ```
-**注意**  ifconfig 检查flannel、docker0网卡是否一致
+**注意**  ifconfig 检查flannel、docker0网卡是否一致，不一致会导致pod之间网络不通，这也是导致heapster、dashoard等应用出现问题的主要原因之一
 ``` bash
 [root@localhost ~]# ifconfig
 docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1450
