@@ -91,4 +91,33 @@ WantedBy=multi-user.target
 systemctl daemon-reload
 systemctl restart docker
 ```
+**注意**  ifconfig 检查flannel、docker0网卡是否一致
+``` bash
+[root@localhost ~]# ifconfig
+docker0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1450
+        inet 172.30.82.1  netmask 255.255.255.0  broadcast 172.30.82.255
+        inet6 fe80::42:45ff:feff:42e1  prefixlen 64  scopeid 0x20<link>
+        ether 02:42:45:ff:42:e1  txqueuelen 0  (Ethernet)
+        RX packets 42558  bytes 9449904 (9.0 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 47405  bytes 270788340 (258.2 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
+ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 172.20.0.113  netmask 255.255.255.0  broadcast 172.20.0.255
+        inet6 fe80::5ec5:cbd0:8e08:efaa  prefixlen 64  scopeid 0x20<link>
+        ether 00:0c:29:b3:f6:ff  txqueuelen 1000  (Ethernet)
+        RX packets 2013762  bytes 621574860 (592.7 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 1929515  bytes 684681865 (652.9 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+flannel.1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1450
+        inet 172.30.82.0  netmask 255.255.255.255  broadcast 0.0.0.0
+        ether ee:02:08:99:95:09  txqueuelen 0  (Ethernet)
+        RX packets 193712  bytes 276110507 (263.3 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 10501  bytes 851790 (831.8 KiB)
+        TX errors 0  dropped 23 overruns 0  carrier 0  collisions 0
+
+```
