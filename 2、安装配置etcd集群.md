@@ -72,7 +72,7 @@ ETCD_PEER_TRUSTED_CA_FILE="/etc/kubernetes/ssl/ca.pem"
 ```
 注意：配置文件只是其中一台机器的，部署到另一台机器时，记得更改ip地址
 
-# 启动 etcd 服务
+## 启动 etcd 服务
 
 ``` bash
 systemctl daemon-reload
@@ -81,7 +81,7 @@ systemctl start etcd
 systemctl status etcd
 ```
 
-# 验证服务
+## 验证服务
 
 在任一 kubernetes master 机器上执行如下命令：
 
