@@ -18,12 +18,14 @@ FLANNEL_MTU=1450
 FLANNEL_IPMASQ=false
 ```
 
-- /run/docker_opts.env
+- /run/flannel/docker
 
 ```ini
-DOCKER_OPT_BIP="--bip=172.30.46.1/24"
+[root@localhost ~]# cat /run/flannel/docker 
+DOCKER_OPT_BIP="--bip=172.30.21.1/24"
 DOCKER_OPT_IPMASQ="--ip-masq=true"
 DOCKER_OPT_MTU="--mtu=1450"
+DOCKER_NETWORK_OPTIONS=" --bip=172.30.21.1/24 --ip-masq=true --mtu=1450"
 ```
 
 Docker将会读取这两个环境变量文件作为容器启动参数。
@@ -58,7 +60,6 @@ Type=notify
 # exists and systemd currently does not support the cgroup feature set required
 # for containers run by docker
 EnvironmentFile=-/run/flannel/docker
-EnvironmentFile=-/run/flannel/subnet.env
 ExecStart=/usr/bin/dockerd \
           $DOCKER_OPT_BIP \
           $DOCKER_OPT_IPMASQ \
