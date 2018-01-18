@@ -70,3 +70,31 @@ ETCD_PEER_TRUSTED_CA_FILE="/etc/kubernetes/ssl/ca.pem"
 #ETCD_PEER_CLIENT_CERT_AUTH="true"
 
 ```
+注意：配置文件只是其中一台机器的，部署到另一台机器时，记得更改ip地址
+
+# 启动 etcd 服务
+
+``` bash
+systemctl daemon-reload
+systemctl enable etcd
+systemctl start etcd
+systemctl status etcd
+```
+
+# 验证服务
+
+在任一 kubernetes master 机器上执行如下命令：
+
+``` bash
+[root@localhost ~]# etcdctl --endpoints=https://172.20.0.113:2379 \
+>   --ca-file=/etc/kubernetes/ssl/ca.pem \
+>   --cert-file=/etc/kubernetes/ssl/kubernetes.pem \
+>   --key-file=/etc/kubernetes/ssl/kubernetes-key.pem \
+>   cluster-health
+member 58a6194023ba1810 is healthy: got healthy result from https://172.20.0.115:2379
+member 7a5dcb96fe62cea2 is healthy: got healthy result from https://172.20.0.113:2379
+member b918c49d7706fa2a is healthy: got healthy result from https://172.20.0.114:2379
+cluster is healthy
+[root@localhost ~]# 
+
+```
