@@ -1,6 +1,6 @@
 # 创建 kubeconfig 文件
 
-注意：请先参考 [安装kubectl命令行工具](kubectl-installation.md)，先在 master 节点上安装 kubectl 然后再进行下面的操作。
+注意：请先参考 [安装kubectl命令行工具](5、配置kubectl工具.md)，先在 master 节点上安装 kubectl 然后再进行下面的操作。
 
 `kubelet`、`kube-proxy` 等 Node 机器上的进程与 Master 机器的 `kube-apiserver` 进程通信时需要认证和授权；
 
@@ -110,11 +110,8 @@ kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
 
 ## 分发 kubeconfig 文件
 
-将两个 kubeconfig 文件分发到所有 Node 机器的 `/etc/kubernetes/` 目录
+将两个 kubeconfig 文件分发到所有 Node 机器的 `/etc/kubernetes/` 目录，后续kubelet安装需要使用
 
 ``` bash
 cp bootstrap.kubeconfig kube-proxy.kubeconfig /etc/kubernetes/
 ```
-## 参考
-
-关于 kubeconfig 文件的更多信息请参考 [使用 kubeconfig 文件配置跨集群认证](../guide/authenticate-across-clusters-kubeconfig.md)。
