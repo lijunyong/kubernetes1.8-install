@@ -67,7 +67,7 @@ kubectl config set-context default \
 # 设置默认上下文
 kubectl config use-context default --kubeconfig=bootstrap.kubeconfig
 ```
-**注意  ${BOOTSTRAP_TOKEN}参数如果无法保障，最好使用: 50849aa840e78fb803d0104432f8c5fc，否则后续无法生成csr **
+**注意: ${BOOTSTRAP_TOKEN}参数如果无法保障，最好使用: 50849aa840e78fb803d0104432f8c5fc，否则后续无法生成csr**
 ```
 [root@localhost kubernetes]# cat token.csv 
 50849aa840e78fb803d0104432f8c5fc,kubelet-bootstrap,10001,"system:kubelet-bootstrap"
