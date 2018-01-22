@@ -47,4 +47,5 @@ spec:
     - protocol: TCP
       port: 8080
       name: admin
+      nodePort: 31008
   type: NodePort
