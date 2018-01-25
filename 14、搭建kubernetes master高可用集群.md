@@ -98,7 +98,6 @@ global
     log 127.0.0.1 local0 err
     log 127.0.0.1 local1 warning
 
-
 defaults
     mode http
     log global
@@ -119,7 +118,7 @@ listen k8s_server_6443
     server k8s-master-3 172.20.0.115:6443  check
 
 listen k8s_server_8080
-    bind 10.0.68.40:9080
+    bind 172.20.0.224:9080
     mode tcp
     option tcplog
     option tcp-check
