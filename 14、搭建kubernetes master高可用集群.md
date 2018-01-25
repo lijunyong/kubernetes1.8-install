@@ -1,5 +1,5 @@
 # 搭建kubernetes master高可用集群
-可参考[Kubernetes cluster step-by-step](https://icicimov.github.io/blog/kubernetes/Kubernetes-cluster-step-by-step-Part5/)搭建高可用集群需要用到的软件：
+可参考[Kubernetes cluster step-by-step](https://icicimov.github.io/blog/kubernetes/Kubernetes-cluster-step-by-step-Part5/)，搭建高可用集群需要用到的软件：
 + keepalive：通过keepalived vrrp协议生成vip，实现vip在多台master之间漂移，实现高可用
 + haproxy：通过haproxy实现负载均衡，所有访问都通过vip经过haproxy实现负载均衡
 + kubernetes master：三台master实现高可用
