@@ -21,6 +21,7 @@ yum install keepalived
 + 此时原MASTER由BACKUP又抢占成了MASTER,同时执行notify_master的脚本文件（启动haproxy）；
 + 同时原BACKUP由MASTER又变了BACKUP,同时执行notify_backup的脚本文件（关闭haproxy）；
 
+master配置文件
 ```
 ! Configuration File for keepalived
 
