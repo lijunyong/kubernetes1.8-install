@@ -64,7 +64,7 @@ $ diff kubedns-controller.yaml.base kubedns-controller.yaml
 + 使用系统已经做了 RoleBinding 的 `kube-dns` ServiceAccount，该账户具有访问 kube-apiserver DNS 相关 API 的权限；
 
 
-已经修改好的 yaml 文件见：[kubedns](https://github.com/lijunyong/kubernetes1.8-install/tree/master/cluster/kubedns)
++ 已经修改好的 yaml 文件见：[kubedns](https://github.com/lijunyong/kubernetes1.8-install/tree/master/cluster/kubedns)
 
 ## 执行所有定义文件
 
