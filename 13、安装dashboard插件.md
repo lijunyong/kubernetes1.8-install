@@ -52,13 +52,13 @@ $ kubectl create -f  .
 NAME                   TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE
 kubernetes-dashboard   NodePort   10.254.164.205   <none>        443:31717/TCP   14d
 ```
-浏览器通过：https://172.20.0.113:31717/，访问
+浏览器通过：`https://172.20.0.113:31717/`访问
 
 
 
 ### 生成 token
 
-需要创建一个admin用户并授予admin角色绑定，使用下面的yaml文件创建admin用户并赋予他管理员权限，然后可以通过token登陆dashbaord，该文件见[admin-role.yaml](https://github.com/rootsongjc/kubernetes-handbook/tree/master/manifests/dashboard-1.7.1/admin-role.yaml)。这种认证方式本质上是通过 Service Account 的身份认证加上 Bearer token 请求 API server 的方式实现，参考 [Kubernetes 中的认证](https://kubernetes.io/docs/admin/authentication/)。
+需要创建一个admin用户并授予admin角色绑定，使用下面的yaml文件创建admin用户并赋予他管理员权限，然后可以通过token登陆dashbaord，文件[admin-role.yaml]。这种认证方式本质上是通过 Service Account 的身份认证加上 Bearer token 请求 API server 的方式实现，参考 [Kubernetes 中的认证](https://kubernetes.io/docs/admin/authentication/)。
 
 ```yaml
 kind: ClusterRoleBinding
