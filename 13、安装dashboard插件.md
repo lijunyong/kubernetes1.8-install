@@ -52,9 +52,8 @@ $ kubectl create -f  .
 NAME                   TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE
 kubernetes-dashboard   NodePort   10.254.164.205   <none>        443:31717/TCP   14d
 ```
-浏览器通过：`https://172.20.0.113:31717/`访问
-
-
+浏览器通过：`https://172.20.0.113:31717/`访问 <br/>
+![kubernetes dashboard](/images/dashboard.png)
 
 ### 生成 token
 
@@ -96,24 +95,27 @@ kubectl create -f admin-role.yaml
 
 ```bash
 # 获取admin-token的secret名字
-$ kubectl -n kube-system get secret|grep admin-token
-admin-token-nwphb                          kubernetes.io/service-account-token   3         6m
-# 获取token的值
-$ kubectl -n kube-system describe secret admin-token-nwphb
-Name:		admin-token-nwphb
-Namespace:	kube-system
-Labels:		<none>
-Annotations:	kubernetes.io/service-account.name=admin
-		kubernetes.io/service-account.uid=f37bd044-bfb3-11e7-87c0-f4e9d49f8ed0
+[root@localhost dashboard]# kubectl -n kube-system get secret|grep admin-token
+admin-token-xthwd                        kubernetes.io/service-account-token   3         17d
 
-Type:	kubernetes.io/service-account-token
+# 获取token的值
+
+[root@localhost dashboard]# kubectl -n kube-system describe secret admin-token-xthwd
+Name:         admin-token-xthwd
+Namespace:    kube-system
+Labels:       <none>
+Annotations:  kubernetes.io/service-account.name=admin
+              kubernetes.io/service-account.uid=2b9925d9-f9e7-11e7-acec-000c29b3f6ff
+
+Type:  kubernetes.io/service-account-token
 
 Data
 ====
-namespace:	11 bytes
-token:		非常长的字符串
-ca.crt:		1310 bytes
-```
+ca.crt:     1359 bytes
+namespace:  11 bytes
+token:      eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi10b2tlbi14dGh3ZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJhZG1pbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjJiOTkyNWQ5LWY5ZTctMTFlNy1hY2VjLTAwMGMyOWIzZjZmZiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTphZG1pbiJ9.T-hrF4Drj88VdEruUsRJDGJakxmRartj7lRzxA6RHrJs6liyA00nAUt1EK--QoW1lxBSSqCWUMSeTm904GLazbi7WHpoHfzOowb9qqvUtBqlNF-0mc1xTmdBzdfh0MlfzTkx7w5EZWc9ItNWWLKdJkI2oUuoEpA_aF_-fJGxFRAZkuUrl4c1IFqJCsnqyp5czu6C0SalZzss86ZoRlkfAnNzihSvp2uu59driYnipEdPBUHv3A7ceiEESbg6DqOL1hATVIvThP8jAQFCLztNapZWtDpUWoLQ-Sc3ZIPZkGqlR_aY3ts9mBb1NVXPyhsWKdwnt2vH589GdQDl8e5lXQ
 
+```
+![kubernetes dashboard mon](/images/dashboard-mon.png)
 
 
