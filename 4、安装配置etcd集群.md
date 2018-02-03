@@ -47,7 +47,7 @@ WantedBy=multi-user.target
 + 创建ectd配置文件
 
 ```
-[root@localhost ~]# vi /var/lib/etcd/
+[root@localhost ~]# vi /etc/etcd/etcd.conf
 
 ETCD_NAME=etcd1
 ETCD_DATA_DIR="/var/lib/etcd/"
