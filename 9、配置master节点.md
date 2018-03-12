@@ -185,6 +185,7 @@ WantedBy=multi-user.target
 systemctl daemon-reload
 systemctl enable kube-scheduler
 systemctl start kube-scheduler
+systemctl status kube-scheduler
 ```
 
 ## 验证 master 节点功能
