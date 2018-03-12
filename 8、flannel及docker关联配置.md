@@ -35,18 +35,6 @@ Docker将会读取这两个环境变量文件作为容器启动参数。
 修改docker的配置文件`vi /usr/lib/systemd/system/docker.service`，增加环境变量配置：
 
 ```
-[root@localhost ~]# cat /etc/sysconfig/flanneld
-# Flanneld configuration options  
-
-# etcd url location.  Point this to the server where etcd runs
-ETCD_ENDPOINTS="https://172.20.0.113:2379,https://172.20.0.114:2379,https://172.20.0.115:2379"
-
-# etcd config key.  This is the configuration key that flannel queries
-# For address range assignment
-ETCD_PREFIX="/kube-centos/network"
-
-# Any additional options that you want to pass
-FLANNEL_OPTIONS="-etcd-cafile=/etc/kubernetes/ssl/ca.pem -etcd-certfile=/etc/kubernetes/ssl/kubernetes.pem -etcd-keyfile=/etc/kubernetes/ssl/kubernetes-key.pem"
 [root@localhost ~]# cat /usr/lib/systemd/system/docker.service
 [Unit]
 Description=Docker Application Container Engine
