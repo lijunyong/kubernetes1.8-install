@@ -11,7 +11,12 @@
 yum install gcc gcc-c++
 yum install kernel-headers
 ```
-+ kernel-devel特别注意，需要安装系统对应内核版本，否则后续安装NVIDIA-Linux-x86_64-396.26.run会报错
+
++ **kernel-devel特别注意，需要安装系统对应内核版本，否则后续安装NVIDIA-Linux-x86_64-396.26.run会报错**
+
+```
+rpm -ivh kernel-devel-3.10.0-514.26.2.el7.x86_64.rpm
+```
 
 安装dkms
 ```
@@ -25,6 +30,10 @@ sh NVIDIA-Linux-x86_64-396.26.run --kernel-source-path=/usr/src/kernels/3.10.0-5
 ```
 
 进入驱动安装界面
+
+## 安装cuda
+
+访问nvidia官网`https://developer.nvidia.com/cuda-downloads`，下载对应版本cuda
 
 
 ## 安装中遇到的问题
