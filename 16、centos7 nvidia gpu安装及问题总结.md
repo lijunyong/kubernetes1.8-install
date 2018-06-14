@@ -34,6 +34,9 @@ sh NVIDIA-Linux-x86_64-396.26.run --kernel-source-path=/usr/src/kernels/3.10.0-5
 ## 安装cuda
 
 访问nvidia官网`https://developer.nvidia.com/cuda-downloads`，下载对应版本cuda
+```
+sh cuda_9.2.88_396.26_linux
+```
 
 
 ## 安装中遇到的问题
