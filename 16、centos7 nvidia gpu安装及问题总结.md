@@ -96,6 +96,9 @@ sudo source /etc/profile
 ```
 
 
+
+
+
 ## 安装中遇到的问题
 
 ### 1、NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running
