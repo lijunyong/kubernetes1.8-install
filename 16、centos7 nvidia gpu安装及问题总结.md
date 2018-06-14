@@ -36,6 +36,63 @@ sh NVIDIA-Linux-x86_64-396.26.run --kernel-source-path=/usr/src/kernels/3.10.0-5
 访问nvidia官网`https://developer.nvidia.com/cuda-downloads`，下载对应版本cuda
 ```
 sh cuda_9.2.88_396.26_linux
+
+#刚开始安装会进入more模式，一直按`空格`即可
+
+#Do you accept the previously read EULA?
+#是否接受协议
+accept
+
+#Install NVIDIA Accelerated Graphics Driver for Linux-x86_64 387.26?
+#是否安装Nvida驱动，需要
+y
+
+#Do you want to install the OpenGL libraries?
+#是否需要安装OpenGL，不需要
+n
+
+#Do you want to run nvidia-xconfig?
+回车
+
+#Install the CUDA 9.1 Toolkit?
+y
+
+#Enter Toolkit Location
+#输入Toolkit的安装目录
+#一般默认即可
+回车
+
+#Do you want to install a symbolic link at /usr/local/cuda?
+#创建一个软连接，我选择是
+y
+
+#Install the CUDA 9.1 Samples?
+#安装CUDA官方示例包
+y
+
+#Enter CUDA Samples Location
+#输入示例包的安装目录，我选的默认路径，可以根据实际情况选择输入
+回车
+
+
+#如果版本不同，提示也可能不同，根据情况输入或选择
+```
+
+配置环境变量
+如果有注意的话，cuda安装完之后有个提示，要配置环境变量
+```
+#修改系统配置文件
+sudo vim /etc/profile
+
+#在最后面加入以下内容
+export PATH=/usr/local/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+
+#保存并退出
+:wq
+
+#使配置文件生效
+sudo source /etc/profile
 ```
 
 
