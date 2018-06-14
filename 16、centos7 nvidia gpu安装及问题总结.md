@@ -1,3 +1,33 @@
+# 安装nvidia gpu
+## 安装gpu驱动
+从nvidia官网`https://www.nvidia.com/Download/index.aspx?lang=en-us`下载对应版本驱动，我用的是centos7
+
+```
+得到文件：NVIDIA-Linux-x86_64-396.26.run
+```
+
+安装依赖库
+```
+yum install gcc gcc-c++
+yum install kernel-headers
+```
++ kernel-devel特别注意，需要安装系统对应内核版本，否则后续安装NVIDIA-Linux-x86_64-396.26.run会报错
+
+安装dkms
+```
+yum install epel-release
+yum install --enablerepo=epel dkms
+```
+
+安装gpu驱动，需要指定kernel所在位置
+```
+sh NVIDIA-Linux-x86_64-396.26.run --kernel-source-path=/usr/src/kernels/3.10.0-514.26.2.el7.x86_64/
+```
+
+进入驱动安装界面
+
+
+## 安装中遇到的问题
 
 ### 1、NVIDIA-SMI has failed because it couldn't communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running
 
