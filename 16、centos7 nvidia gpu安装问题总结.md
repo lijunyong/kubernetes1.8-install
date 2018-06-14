@@ -22,4 +22,9 @@ yum install epel-release
 yum install --enablerepo=epel dkms
 ```
 
+### 4、安装gpu驱动
+
+```
+sh NVIDIA-Linux-x86_64-396.26.run  --kernel-source-path=/usr/src/kernels/3.10.0-514.26.2.el7.x86_64/
+```
 
