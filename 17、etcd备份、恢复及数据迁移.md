@@ -1,5 +1,8 @@
 # etcd备份、恢复及数据迁移
-etcd在使用中难免遇到故障情况，这就涉及数据备份、恢复、迁移的问题。
+etcd在使用中难免遇到故障情况，这就涉及数据备份、恢复、迁移的问题。 参考
++ https://blog.csdn.net/kozazyh/article/details/79587141
++ https://www.maideliang.com/index.php/archives/25/
+
 ## 保存快照
 由于我使用的书tsl部署etcd集群，所有需要证书：
 ```
