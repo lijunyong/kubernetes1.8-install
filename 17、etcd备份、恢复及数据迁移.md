@@ -27,29 +27,13 @@ get /registry/namespaces --prefix -w=json
 把生成的snapshot.db拷贝到需要恢复的etcd集群，在三台etcd机器上分别执行如下命令：
 ```
 # etcd1
-ETCDCTL_API=3 etcdctl snapshot restore snapshot.db  \     
---endpoints=http://172.16.56.226:2379 \
---name=etcd1     \   
---initial-advertise-peer-urls=http://172.16.56.226:2380      \
---initial-cluster-token=k8s-etcd-cluster    \
---initial-cluster=etcd1=http://172.16.56.226:2380,etcd2=http://172.16.56.225:2380,etcd3=http://172.16.56.227:2380    \
---data-dir=/var/lib/etcd
+ETCDCTL_API=3 etcdctl snapshot restore snapshot.db  --endpoints=http://172.16.56.226:2379 --name=etcd1  --initial-advertise-peer-urls=http://172.16.56.226:2380  --initial-cluster-token=k8s-etcd-cluster  --initial-cluster=etcd1=http://172.16.56.226:2380,etcd2=http://172.16.56.225:2380,etcd3=http://172.16.56.227:2380  --data-dir=/var/lib/etcd
 
 # etcd2
-ETCDCTL_API=3  etcdctl snapshot restore snapshot.db   \
---endpoints=http://172.16.56.225:2379 --name=etcd2   \
---initial-advertise-peer-urls=http://172.16.56.225:2380   \
---initial-cluster-token=k8s-etcd-cluster    \
---initial-cluster=etcd1=http://172.16.56.226:2380,etcd2=http://172.16.56.225:2380,etcd3=http://172.16.56.227:2380    \
---data-dir=/var/lib/etcd
+ETCDCTL_API=3  etcdctl snapshot restore snapshot.db  --endpoints=http://172.16.56.225:2379 --name=etcd2   --initial-advertise-peer-urls=http://172.16.56.225:2380   --initial-cluster-token=k8s-etcd-cluster    --initial-cluster=etcd1=http://172.16.56.226:2380,etcd2=http://172.16.56.225:2380,etcd3=http://172.16.56.227:2380    --data-dir=/var/lib/etcd
 
 # etcd3
-ETCDCTL_API=3 etcdctl snapshot restore snapshot.db  \
---endpoints=http://172.16.56.227:2379 --name=etcd3   \
---initial-advertise-peer-urls=http://172.16.56.227:2380  \
---initial-cluster-token=k8s-etcd-cluster  \
---initial-cluster=etcd1=http://172.16.56.226:2380,etcd2=http://172.16.56.225:2380,etcd3=http://172.16.56.227:2380  \
---data-dir=/var/lib/etcd
+ETCDCTL_API=3 etcdctl snapshot restore snapshot.db  --endpoints=http://172.16.56.227:2379 --name=etcd3   --initial-advertise-peer-urls=http://172.16.56.227:2380  --initial-cluster-token=k8s-etcd-cluster  --initial-cluster=etcd1=http://172.16.56.226:2380,etcd2=http://172.16.56.225:2380,etcd3=http://172.16.56.227:2380  --data-dir=/var/lib/etcd
 
 ```
 **注意** 特别注意数据恢复etcd集群千万不需要启动，恢复后在启动
