@@ -2,16 +2,12 @@
 etcd在使用中难免遇到故障情况，这就涉及数据备份、恢复、迁移的问题。 参考
 + https://blog.csdn.net/kozazyh/article/details/79587141
 + https://www.maideliang.com/index.php/archives/25/
++ https://www.jianshu.com/p/c60c08effaaa
 
 ## 保存快照
 由于我使用的书tsl部署etcd集群，所有需要证书：
 ```
-ETCDCTL_API=3 etcdctl \
---endpoints=https://172.20.0.113:2379 \  
---cacert=/etc/kubernetes/ssl/ca.pem  \
---cert=/etc/kubernetes/ssl/kubernetes.pem  \
---key=/etc/kubernetes/ssl/kubernetes-key.pem \
-snapshot save /opt/snapshot.db
+ETCDCTL_API=3 etcdctl --endpoints=https://172.20.0.113:2379 --cacert=/etc/kubernetes/ssl/ca.pem  --cert=/etc/kubernetes/ssl/kubernetes.pem --key=/etc/kubernetes/ssl/kubernetes-key.pem snapshot save /opt/snapshot.db
 ```
 **注意** kubernetes访问etcd是通过ETCDCTL_API=3，ectd访问kubernetest数据，如下
 ```
