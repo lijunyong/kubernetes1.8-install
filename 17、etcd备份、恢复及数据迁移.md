@@ -18,6 +18,7 @@ ETCDCTL_API=3 etcdctl \
 --cert=/etc/kubernetes/ssl/kubernetes.pem \
 --key=/etc/kubernetes/ssl/kubernetes-key.pem \
 get /registry/namespaces --prefix -w=json
+{"header":{"cluster_id":14187615942257587067,"member_id":8817427494834720418,"revision":1022623,"raft_term":18670},"kvs":[{"key":"L3JlZ2lzdHJ5L25hbWVzcGFjZXMvZGVmYXVsdA==","create_revision":4,"mod_revision":712781,"version":6,"value":"azhzAAoPCgJ2MRIJTmFtZXNwYWNlEnsKYQoHZGVmYXVsdBIAGgAiACokNmJkNDdiNjgtMjY2OS0xMWU4LTgxZDEtMDAwYzI5YTZlMmM2MgA4AEIICK35nNUFEABaGgoPaXN0aW8taW5qZWN0aW9uEgdlbmFibGVkegASDAoKa3ViZXJuZXRlcxoICgZBY3RpdmUaACIA"},{"key":"L3JlZ2lzdHJ5L25hbWVzcGFjZXMvaXN0aW8tc3lzdGVt","create_revision":725693,"mod_revision":725693,"version":1,"value":"azhzAAoPCgJ2MRIJTmFtZXNwYWNlEmQKSgoMaXN0aW8tc3lzdGVtEgAaACIAKiRiYTM5ODI2Mi05MTcyLTExZTgtOGQ2NC0wMDBjMjlhNmUyYzYyADgAQggI8aDr2gUQAHoAEgwKCmt1YmVybmV0ZXMaCAoGQWN0aXZlGgAiAA=="},{"key":"L3JlZ2lzdHJ5L25hbWVzcGFjZXMva3ViZS1wdWJsaWM=","create_revision":9,"mod_revision":9,"version":1,"value":"azhzAAoPCgJ2MRIJTmFtZXNwYWNlEmMKSQoLa3ViZS1wdWJsaWMSABoAIgAqJDZiZGFiZTNhLTI2NjktMTFlOC04MWQxLTAwMGMyOWE2ZTJjNjIAOABCCAit+ZzVBRAAegASDAoKa3ViZXJuZXRlcxoICgZBY3RpdmUaACIA"},{"key":"L3JlZ2lzdHJ5L25hbWVzcGFjZXMva3ViZS1zeXN0ZW0=","create_revision":8,"mod_revision":8,"version":1,"value":"azhzAAoPCgJ2MRIJTmFtZXNwYWNlEmMKSQoLa3ViZS1zeXN0ZW0SABoAIgAqJDZiZDkwZjYyLTI2NjktMTFlOC04MWQxLTAwMGMyOWE2ZTJjNjIAOABCCAit+ZzVBRAAegASDAoKa3ViZXJuZXRlcxoICgZBY3RpdmUaACIA"}],"count":4}
 ```
 ## 数据恢复、迁移
 把生成的snapshot.db拷贝到需要恢复的etcd集群，在三台etcd机器上分别执行如下命令：
