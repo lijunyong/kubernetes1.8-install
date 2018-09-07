@@ -1,6 +1,6 @@
 # 1、layerStore
 docker daemon在初始化过程中，会初始化一个layerStore，那么layerStore是什么呢？从名字可以看出，是用来存储layer的，docker镜像时分层的，一层称为一个layer。在之前的docker源码中，docker的镜像是由一个叫graph的数据结构进行管理的，现在换成了layerStore
-
+```
 type layerStore struct {
 	store  MetadataStore
 	driver graphdriver.Driver
@@ -11,6 +11,7 @@ type layerStore struct {
 	mounts map[string]*mountedLayer
 	mountL sync.Mutex
 }
+```
 layStore主要包含四个主要的结构成员，store、driver、layerMap和mounts。
 
 ## 1.1 store
@@ -50,7 +51,7 @@ btrfs
 
 ## 1.3 layerMap
 layerMap本质上是一个map，map的类型为map[ChainID]*roLayer，即map的键为ChainID（字母串），值为roLayer。前面说store本质上是磁盘上保存了各个layer的元数据信息，当docker初始化时，它会利用这些元数据文件在内存中构造各个layer，每个Layer都用一个roLayer结构体表示，即只读(ro)的layer
-
+```
 type roLayer struct {
 	chainID    ChainID
 	diffID     DiffID
@@ -63,6 +64,7 @@ type roLayer struct {
 	referenceCount int
 	references     map[Layer]struct{}
 }
+```
 前面提到每一层layer都有三个id。chain-id、diffID、cache-id。现在我们来解释一下三个id的区别，之所以会有三个id是由于docker从v 1.10开始采用了一种叫做content addressable storage的模型
 
 + diff-id：通过docker pull下载镜像时，镜像的json文件中每一个layer都有一个唯一的diff-id
@@ -74,7 +76,7 @@ roLayer还有parent数据成员、referenceCount和references成员，referentce
 
 ## 1.4 mounts
 mounts本质上是一个map，类型为map[string]*mountedLayer。前面提到过mounts存放的其实是每个容器可写的layer的信息，他们的元数据存放在/var/lib/docker/image/{driver}/layerdb/mounts目录下。而mountedLayer则是这些可写的layer在内存中的结构
-
+```
 type mountedLayer struct {
 	name       string
 	mountID    string
@@ -85,11 +87,12 @@ type mountedLayer struct {
 
 	references map[RWLayer]*referencedRWLayer
 }
+```
 mountedLayer没有chain-id、diff-id、cached-id，只有mountID和initID，其中mountID是由随机生成的64个16进制数构成，initID等于mountID-init。initID和mountID表示了这个layer数据存放的位置，和cache-id一样。
 
 # 2、imageStore
 imageStore存放的是各个docker image的信息。imageStore的类型为image.Store，结构体为
-
+```
 type store struct {
 	sync.Mutex
 	ls        LayerGetReleaser
@@ -97,6 +100,7 @@ type store struct {
 	fs        StoreBackend
 	digestSet *digest.Set
 }
+```
 ls类型为LayerGetReleaser接口，初始化时将ls初始化为layerStore。fs类型为StoreBackend。
 
 ifs, err := image.NewFSStoreBackend(filepath.Join(imageRoot, "imagedb"))
@@ -108,18 +112,19 @@ content目录：content下面的sha256目录下存放了每个docker image的元
 metadata目录：metadata目录存放了docker image的parent信息
 
 imageStore包含了images成员，类型为map[ID]*imageMeta，images就是每一个镜像的信息，看看imageMeta结构体
-
+```
 type imageMeta struct {
 	layer    layer.Layer
 	children map[ID]struct{}
 }
+```
 imageMeta包含一个layer成员，之前说过docker image是由多个只读的roLayer构成，而这里的layer就是最上层的layer。
 
 此外，imageStore还包含一个digestSet成员，本质上是一个set数据结构，里面存放的其实是每个docker的最上层layer的chain-id。
 
 # 3、referenceStore
 referfenceStore的类型为reference.store，这个应该是docker用户最熟悉的部分了。以一个ubunu镜像为例，ubuntu镜像的名字就叫ubuntu，一个完成的镜像还包括tag，于是就有了ubuntu:latest、ubuntu:14.04等。这部分信息其实就是存储才referenceStore中。这部分信息其实保存在/var/lib/docker/image/{driver}/repositories.json这个文件中
-
+```
  "Repositories": {
     "ubuntu": {
       "ubuntu@sha256:bd00486535fd3ab00463b0572d94a62715cb790e482d5419c9179cd22c74520b": "sha256:f2d8ce9fa988ed844dda693fe260b9afd393b9a65b647aa02f62d6eecdb7b635",
@@ -133,36 +138,39 @@ referfenceStore的类型为reference.store，这个应该是docker用户最熟�
     }
   }
 }
+```
 从这里我们可以看出，这才机器包括两个镜像，ubuntu和busybox，其中ubuntu有两个tag分别为latest和14.04，而busybox只有latest一个tag
 
 referfenceStore其实就是从这个文件反序列化而来的
-
+```
 type store struct {
 	mu sync.RWMutex
 	jsonPath string
 	Repositories map[string]repository
 	referencesByIDCache map[image.ID]map[string]Named
 }
+```
 从上面的json文件我们可以看出，”ubuntu:14.04”和”ubuntu@sha256:bd00486535fd3ab00463b0572d94a62715cb790e482d5419c9179cd22c74520b”指向的其实是同一个image。其实我们pull镜像时
 
 即可以
-
+```
 docker pull ubuntu:14.04
-
+```
 也可以
-
+```
 docker pull ubuntu@sha256:bd00486535fd3ab00463b0572d94a62715cb790e482d5419c9179cd22c74520b
-
+```
 # 4、distributionMetadataStore
 这个结构体没去详细了解过，它在我们下载镜像时会用到。数据存储在/var/lib/docker/image/{driver}/distribution
-
+```
 type FSMetadataStore struct {
 	sync.RWMutex
 	basePath string
 }
+```
 5、storage driver
 目前docker支持四种storage driver，aufs、devicemapper、overlay和btrfs。所有的driver必须支持以下接口
-
+```
 type Driver interface {
 	ProtoDriver
 	Diff(id, parent string) (archive.Archive, error)
@@ -183,6 +191,7 @@ type ProtoDriver interface {
 	GetMetadata(id string) (map[string]string, error)
 	Cleanup() error
 }
+```
 镜像的数据前面提过，存放在/var/lib/docker/{driver}目录下
 
 aufs下面有三个目录，diff、layers、mnt。diff目录下面存储以各个layer的cache-id存储各个layer的数据；layers文件存储了各个layer的parent layer；mnt目录主要是用于挂在layer
