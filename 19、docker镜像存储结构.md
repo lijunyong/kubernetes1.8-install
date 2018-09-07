@@ -1,4 +1,4 @@
-# aufs存储结果分析
+# aufs存储结构
 ```
 root@main:~# docker start 373d31dd8756
 373d31dd8756
