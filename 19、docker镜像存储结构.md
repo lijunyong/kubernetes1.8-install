@@ -102,28 +102,70 @@ root@main:/var/lib/docker/containers# tree
 
 4 directories, 7 files
 
-root@main:/var/lib/docker/image/aufs# tree -L 3
+root@main:/var/lib/docker/image/aufs# tree
 .
 ├── distribution
 │   ├── diffid-by-digest
 │   │   └── sha256
+│   │       ├── 124c757242f88002a858c23fc79f8262f9587fa30fd92507e586ad074afb42b6
+│   │       ├── 398d32b153e84fe343f0c5b07d65e89b05551aae6cb8b3a03bb2b662976eb3b8
+│   │       ├── 9d866f8bde2a0d607a6d17edc0fbd5e00b58306efc2b0a57e0ba72f269e7c6be
+│   │       ├── afde35469481d2bc446d649a7a3d099147bbf7696b66333e76a411686b617ea1
+│   │       └── fa3f2f277e67c5cbbf1dac21dc27111a60d3cd2ef494d94aa1515d3319f2a245
 │   └── v2metadata-by-diffid
 │       └── sha256
+│           ├── 6267b420796f78004358a36a2dd7ea24640e0d2cd9bbfdba43bb0c140ce73567
+│           ├── 6a061ee02432e1472146296de3f6dab653f57c109316fa178b40a5052e695e41
+│           ├── 8d7ea83e3c626d5ef1e6a05de454c3fe8b7a567db96293cb094e71930dba387d
+│           ├── a30b835850bfd4c7e9495edf7085cedfad918219227c7157ff71e8afe2661f63
+│           └── f73b2816c52ac5f8c1f64a1b309b70ff4318d11adff253da4320eee4b3236373
 ├── imagedb
 │   ├── content
 │   │   └── sha256
+│   │       └── cd6d8154f1e16e38493c3c2798977c5e142be5e5d41403ca89883840c6d51762
 │   └── metadata
 │       └── sha256
 ├── layerdb
 │   ├── mounts
 │   │   └── 373d31dd8756e2355b61a78d55abb0b572b4b64918c28a4dfd819a94b252d8ad
+│   │       ├── init-id
+│   │       ├── mount-id
+│   │       └── parent
 │   ├── sha256
 │   │   ├── 2416e906f135eea2d08b4a8a8ae539328482eacb6cf39100f7c8f99e98a78d84
+│   │   │   ├── cache-id
+│   │   │   ├── diff
+│   │   │   ├── parent
+│   │   │   ├── size
+│   │   │   └── tar-split.json.gz
 │   │   ├── 4b3d88bd6e729deea28b2390d1ddfdbfa3db603160a1129f06f85f26e7bcf4a2
+│   │   │   ├── cache-id
+│   │   │   ├── diff
+│   │   │   ├── parent
+│   │   │   ├── size
+│   │   │   └── tar-split.json.gz
 │   │   ├── 7f8291c73f3ecc4dc9317076ad01a567dd44510e789242368cd061c709e0e36d
+│   │   │   ├── cache-id
+│   │   │   ├── diff
+│   │   │   ├── parent
+│   │   │   ├── size
+│   │   │   └── tar-split.json.gz
 │   │   ├── a30b835850bfd4c7e9495edf7085cedfad918219227c7157ff71e8afe2661f63
+│   │   │   ├── cache-id
+│   │   │   ├── diff
+│   │   │   ├── size
+│   │   │   └── tar-split.json.gz
 │   │   └── f51700a4e396a235cee37249ffc260cdbeb33268225eb8f7345970f5ae309312
+│   │       ├── cache-id
+│   │       ├── diff
+│   │       ├── parent
+│   │       ├── size
+│   │       └── tar-split.json.gz
 │   └── tmp
 └── repositories.json
 
+20 directories, 39 files
+
 ```
+
+# overlay2存储结构
