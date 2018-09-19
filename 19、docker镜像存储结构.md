@@ -326,8 +326,8 @@ root@main:/var/lib/docker/image/aufs# tree
 │           └── f73b2816c52ac5f8c1f64a1b309b70ff4318d11adff253da4320eee4b3236373
 ├── imagedb
 │   ├── content
-│   │   └── sha256
-│   │       └── cd6d8154f1e16e38493c3c2798977c5e142be5e5d41403ca89883840c6d51762
+│   │   └── sha256 #镜像ID，跟docker images命令下的imageID对应，里面存储了整个镜像的结构信息，
+│   │       └── cd6d8154f1e16e38493c3c2798977c5e142be5e5d41403ca89883840c6d51762
 │   └── metadata
 │       └── sha256
 ├── layerdb
@@ -336,10 +336,10 @@ root@main:/var/lib/docker/image/aufs# tree
 │   │       ├── init-id
 │   │       ├── mount-id
 │   │       └── parent
-│   ├── sha256
-│   │   ├── 2416e906f135eea2d08b4a8a8ae539328482eacb6cf39100f7c8f99e98a78d84
-│   │   │   ├── cache-id
-│   │   │   ├── diff
+│   ├── sha256 #chainID
+│   │   ├── 2416e906f135eea2d08b4a8a8ae539328482eacb6cf39100f7c8f99e98a78d84  
+│   │   │   ├── cache-id  #对应/var/lib/docker/aufs/layers/下的ID
+│   │   │   ├── diff    
 │   │   │   ├── parent
 │   │   │   ├── size
 │   │   │   └── tar-split.json.gz
