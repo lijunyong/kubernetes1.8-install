@@ -213,6 +213,21 @@ ETCD_PREFIX="/kube-centos/network"
 # Any additional options that you want to pass
 FLANNEL_OPTIONS="-etcd-cafile=/etc/kubernetes/ssl/ca.pem -etcd-certfile=/etc/kubernetes/ssl/kubernetes.pem -etcd-keyfile=/etc/kubernetes/ssl/kubernetes-key.pem"
 ```
+改成
+```
+[root@node2 ~]# vi /etc/sysconfig/flanneld
+# Flanneld configuration options
+
+# etcd url location.  Point this to the server where etcd runs
+ETCD_ENDPOINTS="https://172.20.0.113:2379,https://172.20.0.114:2379,https://172.20.0.115:2379"
+
+# etcd config key.  This is the configuration key that flannel queries
+# For address range assignment
+ETCD_PREFIX="/kube-centos/network"
+
+# Any additional options that you want to pass
+FLANNEL_OPTIONS="-etcd-cafile=/etc/kubernetes/etcd/ca.pem -etcd-certfile=/etc/kubernetes/etcd/kubernetes.pem -etcd-keyfile=/etc/kubernetes/etcd/kubernetes-key.pem"
+```
 ## 替换kubernetes master证书
 ```
 [root@node2 etcd]# vi /usr/lib/systemd/system/kube-apiserver.service 
