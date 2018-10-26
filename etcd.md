@@ -213,7 +213,7 @@ ETCD_PREFIX="/kube-centos/network"
 # Any additional options that you want to pass
 FLANNEL_OPTIONS="-etcd-cafile=/etc/kubernetes/ssl/ca.pem -etcd-certfile=/etc/kubernetes/ssl/kubernetes.pem -etcd-keyfile=/etc/kubernetes/ssl/kubernetes-key.pem"
 ```
-## 替换kubernetes证书
+## 替换kubernetes master证书
 ```
 [root@node2 etcd]# vi /usr/lib/systemd/system/kube-apiserver.service 
 [Unit]
