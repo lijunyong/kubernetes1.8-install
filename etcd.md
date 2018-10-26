@@ -33,7 +33,7 @@
 ```
 针对现有情况，为etcd重新制作一套证书。
 
-# 创建 CA (Certificate Authority)
+## 创建 CA (Certificate Authority)
 ```
 cat > ca-config.json <<EOF
 {
@@ -257,7 +257,7 @@ Type=notify
 LimitNOFILE=65536
 
 ```
-重启修改后的服务
+### 重启修改后的服务
 ```
 [root@node2 etcd]# systemctl daemon-reload
 [root@node2 etcd]# systemctl restart flanneld
@@ -272,7 +272,7 @@ etcd-1               Healthy   {"health": "true"}
 
 ```
 ## etcd集群新增节点
-新增节点配置文件
+### 新增节点配置文件
 ```
 [root@localhost ~]# mkdir /var/lib/etcd/
 [root@localhost ~]# cat /etc/etcd/etcd.conf 
@@ -299,7 +299,7 @@ ETCD_PEER_TRUSTED_CA_FILE="/etc/kubernetes/etcd/ca.pem"
 
 [root@localhost ~]# systemctl daemon-reload
 ```
-在集群节点执行添加命令
+### 在集群节点执行添加命令
 ```
 [root@node2 bin]# etcdctl --endpoints=https://172.20.0.113:2379,https://172.20.0.114:2379,https://172.20.0.115:2379   --ca-file=/etc/kubernetes/etcd/ca.pem   --cert-file=/etc/kubernetes/etcd/kubernetes.pem   --key-file=/etc/kubernetes/etcd/kubernetes-key.pem   member add etcd4 https://172.20.0.112:2380
 Added member named etcd4 with ID c3ef7c1eae5b387a to cluster
@@ -309,11 +309,11 @@ ETCD_INITIAL_CLUSTER="etcd3=https://172.20.0.115:2380,etcd1=https://172.20.0.113
 ETCD_INITIAL_CLUSTER_STATE="existing"
 
 ```
-在新增节点启动etcd服务
+### 在新增节点启动etcd服务
 ```
 [root@localhost etcd]# systemctl start etcd
 ```
-查看集群健康状况
+### 查看集群健康状况
 
 ```
 [root@node2 bin]# etcdctl --endpoints=https://172.20.0.113:2379,https://172.20.0.114:2379,https://172.20.0.115:2379   --ca-file=/etc/kubernetes/etcd/ca.pem   --cert-file=/etc/kubernetes/etcd/kubernetes.pem   --key-file=/etc/kubernetes/etcd/kubernetes-key.pem   cluster-health
