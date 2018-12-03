@@ -9,6 +9,10 @@ etcd在使用中难免遇到故障情况，这就涉及数据备份、恢复、�
 ```
 ETCDCTL_API=3 etcdctl --endpoints=https://172.20.0.113:2379 --cacert=/etc/kubernetes/ssl/ca.pem  --cert=/etc/kubernetes/ssl/kubernetes.pem --key=/etc/kubernetes/ssl/kubernetes-key.pem snapshot save /opt/snapshot.db
 ```
+文件夹备份
+```
+etcdctl --endpoints=https://172.20.0.113:2379    --ca-file=/etc/kubernetes/etcd/ca.pem    --cert-file=/etc/kubernetes/etcd/kubernetes.pem    --key-file=/etc/kubernetes/etcd/kubernetes-key.pem backup --data-dir /var/lib/etcd/ --backup-dir /opt/etcd_backup
+```
 **注意** kubernetes访问etcd是通过ETCDCTL_API=3，ectd访问kubernetest数据，如下
 ```
 ETCDCTL_API=3 etcdctl \
