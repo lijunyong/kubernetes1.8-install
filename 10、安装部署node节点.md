@@ -51,8 +51,8 @@ ExecStart=/usr/local/bin/kubelet \
   --experimental-bootstrap-kubeconfig=/etc/kubernetes/bootstrap.kubeconfig \
   --kubeconfig=/etc/kubernetes/kubelet.kubeconfig \
   --cert-dir=/etc/kubernetes/ssl \
-  --cluster_dns=10.254.0.2 \
-  --cluster_domain=cluster.local. \
+  --cluster-dns=10.254.0.2 \
+  --cluster-domain=cluster.local. \
   --hairpin-mode promiscuous-bridge \
   --allow-privileged=true \
   --fail-swap-on=false \
