@@ -287,8 +287,13 @@ etcd-0               Healthy   {"health": "true"}
 etcd-1               Healthy   {"health": "true"}   
 etcd-2               Healthy   {"health": "true"}   
 ```
+## 创建 kubelet bootstrapping kubeconfig 文件及kube-proxy kubeconfig 文件
+```
+cd /etc/kubernetes
+export KUBE_APISERVER="https://172.20.0.113:6443"
 
-
+```
++ KUBE_APISERVER指定VIP地址及端口，通过haproxy转发到三台master上
 
 
 
