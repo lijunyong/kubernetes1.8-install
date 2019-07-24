@@ -54,12 +54,12 @@ cd /root/ssl
 cfssl print-defaults config > config.json
 cfssl print-defaults csr > csr.json
 # 根据config.json文件的格式创建如下的ca-config.json文件
-# 过期时间设置成了 87600h
+# 过期时间设置成了 876000h
 cat > ca-config.json <<EOF
 {
   "signing": {
     "default": {
-      "expiry": "87600h"
+      "expiry": "876000h"
     },
     "profiles": {
       "kubernetes": {
