@@ -69,7 +69,7 @@ cat > ca-config.json <<EOF
             "server auth",
             "client auth"
         ],
-        "expiry": "87600h"
+        "expiry": "876000h"
       }
     }
   }
