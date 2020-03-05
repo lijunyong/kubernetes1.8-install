@@ -32,6 +32,12 @@ vm.swappiness=0
 
 ### 创建kubelet的service配置文件
 
+创建kubelet存储文件
+
+``` bash
+[root@localhost bin]# mkdir /var/lib/kubelet
+```
+
 文件位置`vi /usr/lib/systemd/system/kubelet.service`。
 
 ``` bash
