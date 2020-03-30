@@ -72,6 +72,43 @@ etcdctl --endpoints=https://172.20.0.113:2379,https://172.20.0.114:2379,https://
   mk /kube-centos/network/config '{"Network":"172.30.0.0/16","SubnetLen":24,"Backend":{"Type":"vxlan"}}'
 ```
 
+## flanneld二进制安装配置
+下载地址
+```
+https://github.com/coreos/flannel/releases/download/v0.11.0/flannel-v0.11.0-linux-amd64.tar.gz
+```
+`vi /usr/lib/systemd/system/flanneld.service`新建flanneld.service:
+```
+[Unit]
+Description=Flanneld overlay address etcd agent
+After=network.target
+After=network-online.target
+Wants=network-online.target
+After=etcd.service
+Before=docker.service
+
+[Service]
+Type=notify
+ExecStart=/usr/local/bin/flanneld \
+          -etcd-endpoints=http://172.20.0.113:2379,http://172.20.0.114:2379,http://172.20.0.115:2379 \
+          -etcd-prefix=/kube-centos/network
+ExecStartPost=/usr/local/bin/mk-docker-opts.sh -k DOCKER_NETWORK_OPTIONS -d /run/flannel/subnet.env
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+RequiredBy=docker.service
+```
+查看生成的/run/flannel/subnet.env：
+
+```
+[root@localhost flannel]# cat subnet.env 
+DOCKER_OPT_BIP="--bip=172.30.52.1/24"
+DOCKER_OPT_IPMASQ="--ip-masq=true"
+DOCKER_OPT_MTU="--mtu=1450"
+DOCKER_NETWORK_OPTIONS=" --bip=172.30.52.1/24 --ip-masq=true --mtu=1450"
+```
+
 **启动flannel**
 
 ```shell
